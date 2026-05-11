@@ -1,15 +1,63 @@
-html::before {
-  content: 'CodePen ♥ The Web';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  margin: auto;
-  width: fit-content;
-  height: fit-content;
-  font-family: monospace;
-  opacity: 0.6;
-  background: rebeccapurple;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
+:root {
+  --board-size: 15;
+  --cell-size: 36px;
+}
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f4f1e8;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(var(--board-size), var(--cell-size));
+  grid-template-rows: repeat(var(--board-size), var(--cell-size));
+  border: 2px solid #8b5a2b;
+  background: #d8b16a;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.stone {
+  width: 76%;
+  height: 76%;
+  border-radius: 50%;
+}
+
+.black {
+  background: #111;
+}
+
+.white {
+  background: #fff;
+  border: 1px solid #888;
+}
+
+button {
+  padding: 8px 16px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  cursor: pointer;
 }
