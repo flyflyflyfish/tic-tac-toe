@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>井字棋</title>
+    <style>
+      h1 { color: pink; }
+      .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 24px;
+        background-color: lightblue;
+        border: 2px solid black;
+      }
+      .board { display: flex; }
+    </style>
+  </head>
+  <body>
+    <h1>井字棋</h1>
+    <div class="board">
+      <button class="cell" onclick="handleClick(this,0)"></button>
+      <button class="cell" onclick="handleClick(this,1)"></button>
+      <button class="cell" onclick="handleClick(this,2)"></button>
+    </div>
+    <div class="board">
+      <button class="cell" onclick="handleClick(this,3)"></button>
+      <button class="cell" onclick="handleClick(this,4)"></button>
+      <button class="cell" onclick="handleClick(this,5)"></button>
+    </div>
+    <div class="board">
+      <button class="cell" onclick="handleClick(this,6)"></button>
+      <button class="cell" onclick="handleClick(this,7)"></button>
+      <button class="cell" onclick="handleClick(this,8)"></button>
+    </div>
+
+    <div>
+       <button onclick="reset()">重新开始</button>
+    </div>
+    
+    <script>
+      console.log("井字棋加载成功！");
+      let current = "X";
+let board = ["","","","","","","","",""];
+
+const wins = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]
+];
+
+  
+  
+      
+function handleClick(btn, index) {
+  if (board[index] !== "") return;  // 已落子
+
+  board[index] = current;
+  btn.textContent = current;
+
+  if (checkWin()) {
+    alert(current + " 赢了！🎉");
+    return;
+  }
+
+  if (checkDraw()) {
+    alert("平局");
+    return;
+  }
+
+
+  current = current === "X" ? "O" : "X";
+}
+
+function checkWin()
+{
+  for (let i = 0; i < wins.length; i++) 
+  {
+    let [a, b, c] = wins[i];
+    if (board[a] !== "" && board[a] === board[b] && board[b] === board[c]) 
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+function checkDraw() {
+  // 棋盘已满，且没有获胜者
+  return !board.includes("") && !checkWin();
+}
+
+      function reset() {
+  board = ["","","","","","","","",""];
+  current = "X";
+  let cells = document.querySelectorAll(".cell");
+  cells.forEach(cell => cell.textContent = "");
+      }
+      
+    </script>
+  </body>
+</html>
